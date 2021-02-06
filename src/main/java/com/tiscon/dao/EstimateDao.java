@@ -104,7 +104,9 @@ public class EstimateDao {
         try {
             distance = parameterJdbcTemplate.queryForObject(sql, new BeanPropertySqlParameterSource(prefectureDistance), double.class);
         } catch (IncorrectResultSizeDataAccessException e) {
-            distance = 0;
+            //加納変更_同一県内の移動を75kmとする
+            distance = 75;
+            //変更ここまで
         }
         return distance;
     }
