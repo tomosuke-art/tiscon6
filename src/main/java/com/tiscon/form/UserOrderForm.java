@@ -36,8 +36,8 @@ public class UserOrderForm {
     @NotBlank(message = "転居先住所（市区町村以下）を入力してください")
     private String newAddress;
 
-    @Numeric
-    @NotBlank
+    @NotBlank(message = "段ボールの個数を半角入力してください")
+    @NotBlank(message = "段ボールの個数を入力してください")
     private String box;
 
     @Numeric
