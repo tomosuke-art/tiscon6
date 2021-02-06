@@ -39,6 +39,13 @@
           <td><span th:text="*{email}"></span></td>
           <input type="hidden" name="email" id="email" th:value="*{email}"/>
         </tr>
+        </tbody>
+      </table>
+      <h4>引っ越し内容</h4>
+      <table class="table table-bordered">
+        <col span="1" style="background-color: #A9B7C7;">
+        <col span="2" style="background-color: #FFFFFF;">
+        <tbody>
         <tr>
           <th>転居元住所（都道府県）</th>
           <td>
@@ -62,6 +69,11 @@
           <th>転居先住所（市区町村以下）</th>
           <td><span th:text="*{newAddress}"></span></td>
           <input type="hidden" name="newAddress" id="newAddress" th:value="*{newAddress}"/>
+        </tr>
+        <tr>
+          <th>転居時期(月)</th>
+          <td><span th:text="*{month}"></span></td>
+          <input type="hidden" name="month" id="month" th:value="*{month}"/>
         </tr>
         </tbody>
       </table>
