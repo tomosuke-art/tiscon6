@@ -23,15 +23,16 @@
         <legend>個人情報</legend>
         <div class="form-group">
           <label for="customerName">氏名</label>
-          <input type="text" id="customerName" name="customerName" th:field="*{customerName}" class="form-control" value="山田太郎"/>
+          <input type="text" id="customerName" name="customerName" th:field="*{customerName}" class="form-control" value="山田太郎" placeholder="山田太郎"/>
         </div>
         <div class="form-group">
-          <label for="tel">連絡先TEL</label>
-          <input type="tel" id="tel" name="tel" th:field="*{tel}" class="form-control" value="03-1234-5678"/>
+          <label for="tel">連絡先TEL（ハイフン無し）</label>
+          <input type="tel" id="tel" name="tel" th:field="*{tel}" class="form-control" value="03-1234-5678" placeholder="08012345678" maxlength="12" minlength="10"
+          />
         </div>
         <div class="form-group">
           <label for="email">連絡先メールアドレス</label>
-          <input type="text" id="email" name="email" th:field="*{email}" class="form-control" value="test@test.com"/>
+          <input type="text" id="email" name="email" th:field="*{email}" class="form-control" value="test@test.com" placeholder="aaaa@gmail.com"/>
         </div>
       </fieldset>
       <fieldset>
@@ -45,7 +46,7 @@
         <div class="form-group">
           <label for="oldAddress">転居元住所（市区町村以下）</label>
           <input type="text" id="oldAddress" name="oldAddress" th:field="*{oldAddress}"
-                 class="form-control" value="新宿区西新宿1-1-1"/>
+                 class="form-control" value="新宿区西新宿1-1-1" placeholder="新宿区西新宿1-1-1"/>
         </div>
         <div class="form-group">
           <label for="newPrefectureId">転居先住所（都道府県）</label>
@@ -56,7 +57,7 @@
         <div class="form-group">
           <label for="newAddress">転居先住所（市区町村以下）</label>
           <input type="text" id="newAddress" name="newAddress" th:field="*{newAddress}" class="form-control"
-                 value="札幌市南区1"/>
+                 value="札幌市南区1" placeholder="札幌市南区1"/>
         </div>
         <div class="form-group">
           <label for="month">転居時期(月)</label>
