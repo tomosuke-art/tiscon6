@@ -13,27 +13,27 @@ import javax.validation.constraints.NotNull;
  */
 public class UserOrderForm {
 
-    @NotBlank
+    @NotBlank(message = "お名前を入力してください")
     private String customerName;
 
-    @NotBlank
+    @NotBlank(message = "電話番号を半角入力してください（ハイフン無し）")
     @Numeric
     private String tel;
 
     @Email
-    @NotBlank
+    @NotBlank(message = "メールアドレスを入力してください")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "転居元住所（都道府県）を入力してください")
     private String oldPrefectureId;
 
-    @NotBlank
+    @NotBlank(message = "転居元住所（市区町村以下）を入力してください")
     private String oldAddress;
 
-    @NotBlank
+    @NotBlank(message = "転居先住所（都道府県）を入力してください")
     private String newPrefectureId;
 
-    @NotBlank
+    @NotBlank(message = "転居先住所（市区町村以下）を入力してください")
     private String newAddress;
 
     @Numeric
