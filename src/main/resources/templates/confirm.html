@@ -18,6 +18,9 @@
     <ul th:if="${#fields.hasErrors('all')}">
       <li th:each="err : ${#fields.errors('all')}" th:text="${err}"></li>
     </ul>
+    <ul th:if="${message}== 1">
+      <p style="color:red">段ボール数が200を超えています！TISCON MOVERにご連絡お願い致します。</p>
+    </ul>
     <div class="col-sm-12">
       <h4>個人情報</h4>
       <table class="table table-bordered">

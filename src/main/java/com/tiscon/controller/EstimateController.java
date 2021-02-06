@@ -131,6 +131,11 @@ public class EstimateController {
         UserOrderDto dto = new UserOrderDto();
         BeanUtils.copyProperties(userOrderForm, dto);
         Integer price = estimateService.getPrice(dto);
+// 段ボールの数が200を超えるとエラーメッセージを返しconfirmに表示（トモスケ）
+        if(price == 1){
+            model.addAttribute("message",price);
+            return "confirm";
+        }
 
         model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
         model.addAttribute("userOrderForm", userOrderForm);
