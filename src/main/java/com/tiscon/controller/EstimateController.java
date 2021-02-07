@@ -82,8 +82,22 @@ public class EstimateController {
      * @return 遷移先
      */
     @PostMapping(value = "submit", params = "confirm")
-    String confirm(UserOrderForm userOrderForm, Model model) {
+    String confirm(@Validated UserOrderForm userOrderForm, BindingResult result,Model model) {
+        if (result.hasErrors()) {
 
+            model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
+            model.addAttribute("userOrderForm", userOrderForm);
+            return "input";
+        }
+        // 料金の計算を行う。
+        UserOrderDto dto = new UserOrderDto();
+        BeanUtils.copyProperties(userOrderForm, dto);
+        Integer price = estimateService.getPrice(dto);
+        // 段ボールの数が200を超えるとエラーメッセージを返しconfirmに表示（トモスケ）
+        if(price == -10){
+            model.addAttribute("message",price);
+            return "input";
+        }
         model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
         model.addAttribute("userOrderForm", userOrderForm);
         return "confirm";
@@ -131,7 +145,7 @@ public class EstimateController {
 
             model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
             model.addAttribute("userOrderForm", userOrderForm);
-            return "confirm";
+            return "input";
         }
 
         // 料金の計算を行う。
@@ -141,7 +155,7 @@ public class EstimateController {
         // 段ボールの数が200を超えるとエラーメッセージを返しconfirmに表示（トモスケ）
         if(price == 1){
             model.addAttribute("message",price);
-            return "confirm";
+            return "input";
         }
 
         model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
