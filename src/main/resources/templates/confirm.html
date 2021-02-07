@@ -19,7 +19,7 @@
       <li th:each="err : ${#fields.errors('all')}" th:text="${err}"></li>
     </ul>
     <ul th:if="${message}== 1">
-      <p style="color:red">段ボール数が200を超えています！TISCON MOVERにご連絡お願い致します。</p>
+      <p style="color:red">お荷物の個数が多いです！お荷物の数は合計200個以内または、TISCON MOVERにご連絡お願い致します。</p>
     </ul>
     <div class="col-sm-12">
       <h4>個人情報</h4>
