@@ -17,24 +17,27 @@
 <div class="container">
   <form th:action="@{/submit}" th:object="${userOrderForm}" class="form-horizontal" method="post">
     <h1 style="text-align: center;font-family:sans-serif;">お見積り情報入力</h1>
+    <p style="color:red ; text-align: center;" >※入力は全て必須です</p>
     <ul th:if="${#fields.hasErrors('all')}">
-      <li th:each="err : ${#fields.errors('all')}" th:text="${err}"></li>
+      <p  style="color:red" th:each="err : ${#fields.errors('all')}" th:text="${err}"></p>
+    </ul>
+    <ul th:if="${message}== -10">
+      <p style="color:red">お荷物の個数が多いです！お荷物の数は合計200個以内または、TISCON MOVERにご連絡お願い致します。</p>
     </ul>
     <div class="col-sm-12">
       <fieldset>
         <legend style="color: rgb(58, 100, 100);font-weight: bold;">個人情報 <i class="fas fa-user" style="color: rgb(128, 173, 173)"></i></legend>
         <div class="form-group">
           <label for="customerName">氏名</label>
-          <input type="text" id="customerName" name="customerName" th:field="*{customerName}" class="form-control" value="山田太郎" placeholder="山田太郎"/>
+          <input type="text" id="customerName" name="customerName" th:field="*{customerName}" class="form-control" value="山田太郎" placeholder="山田太郎" required/>
         </div>
         <div class="form-group">
           <label for="tel">連絡先TEL（ハイフン無し）</label>
-          <input type="tel" id="tel" name="tel" th:field="*{tel}" class="form-control" value="03-1234-5678" placeholder="08012345678" maxlength="11" minlength="10"
-          />
+          <input type="tel" id="tel" name="tel" th:field="*{tel}" class="form-control" value="03-1234-5678" placeholder="08012345678" maxlength="11" minlength="10"  required/>
         </div>
         <div class="form-group">
           <label for="email">連絡先メールアドレス</label>
-          <input type="text" id="email" name="email" th:field="*{email}" class="form-control" value="test@test.com" placeholder="aaaa@gmail.com"/>
+          <input type="text" id="email" name="email" th:field="*{email}" class="form-control" value="test@test.com" placeholder="aaaa@gmail.com" required/>
         </div>
       </fieldset>
       <fieldset>
@@ -48,7 +51,7 @@
         <div class="form-group">
           <label for="oldAddress">転居元住所（市区町村以下）</label>
           <input type="text" id="oldAddress" name="oldAddress" th:field="*{oldAddress}"
-                 class="form-control" value="新宿区西新宿1-1-1" placeholder="新宿区西新宿1-1-1"/>
+                 class="form-control" value="新宿区西新宿1-1-1" placeholder="新宿区西新宿1-1-1" required/>
         </div>
         <div class="form-group">
           <label for="newPrefectureId">転居先住所（都道府県）</label>
@@ -59,7 +62,7 @@
         <div class="form-group">
           <label for="newAddress">転居先住所（市区町村以下）</label>
           <input type="text" id="newAddress" name="newAddress" th:field="*{newAddress}" class="form-control"
-                 value="札幌市南区1" placeholder="札幌市南区1"/>
+                 value="札幌市南区1" placeholder="札幌市南区1" required/>
         </div>
         <div class="form-group">
           <label for="month">転居時期(月)</label>
@@ -85,7 +88,7 @@
         <legend style="color: rgb(58, 100, 100);font-weight: bold;">荷物情報 <i class="fas fa-box"></i></legend>
         <div class="form-group">
           <label for="box">段ボールの個数</label>
-          <input type="text" id="box" name="box" th:field="*{box}" class="form-control" value="10"/>
+          <input type="text" id="box" name="box" th:field="*{box}" class="form-control" value="10" required/>
           <!--          <select id="box" name="box" class="form-control" th:field="*{box}">-->
 <!--            <option th:value="0" th:text="0">0</option>-->
 <!--            <option th:value="1" th:text="1">1</option>-->

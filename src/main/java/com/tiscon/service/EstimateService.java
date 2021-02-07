@@ -81,9 +81,9 @@ public class EstimateService {
                 + getBoxForPackage(dto.getBed(), PackageType.BED)
                 + getBoxForPackage(dto.getBicycle(), PackageType.BICYCLE)
                 + getBoxForPackage(dto.getWashingMachine(), PackageType.WASHING_MACHINE);
-        // 段ボールが200を超えたら 1 を返す(中川)
+        // 段ボールが200を超えたら -10を返す(中川)
         if(boxes > 200){
-            return 1;
+            return -10;
         }
         // 箱に応じてトラックの種類が変わり、それに応じて料金が変わるためトラック料金を算出する。
         int pricePerTruck = estimateDAO.getPricePerTruck(boxes);
