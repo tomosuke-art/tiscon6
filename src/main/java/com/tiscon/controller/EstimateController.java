@@ -5,12 +5,19 @@ import com.tiscon.dto.UserOrderDto;
 import com.tiscon.form.UserOrderForm;
 import com.tiscon.service.EstimateService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.servlet.http.HttpServletRequest;
+import java.net.URI;
 
 /**
  * 引越し見積もりのコントローラークラス。
@@ -75,8 +82,22 @@ public class EstimateController {
      * @return 遷移先
      */
     @PostMapping(value = "submit", params = "confirm")
-    String confirm(UserOrderForm userOrderForm, Model model) {
+    String confirm(@Validated UserOrderForm userOrderForm, BindingResult result,Model model) {
+        if (result.hasErrors()) {
 
+            model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
+            model.addAttribute("userOrderForm", userOrderForm);
+            return "input";
+        }
+        // 料金の計算を行う。
+        UserOrderDto dto = new UserOrderDto();
+        BeanUtils.copyProperties(userOrderForm, dto);
+        Integer price = estimateService.getPrice(dto);
+        // 段ボールの数が200を超えるとエラーメッセージを返しconfirmに表示（トモスケ）
+        if(price == -10){
+            model.addAttribute("message",price);
+            return "input";
+        }
         model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
         model.addAttribute("userOrderForm", userOrderForm);
         return "confirm";
@@ -124,17 +145,17 @@ public class EstimateController {
 
             model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
             model.addAttribute("userOrderForm", userOrderForm);
-            return "confirm";
+            return "input";
         }
 
         // 料金の計算を行う。
         UserOrderDto dto = new UserOrderDto();
         BeanUtils.copyProperties(userOrderForm, dto);
         Integer price = estimateService.getPrice(dto);
-// 段ボールの数が200を超えるとエラーメッセージを返しconfirmに表示（トモスケ）
+        // 段ボールの数が200を超えるとエラーメッセージを返しconfirmに表示（トモスケ）
         if(price == 1){
             model.addAttribute("message",price);
-            return "confirm";
+            return "input";
         }
 
         model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
@@ -152,7 +173,7 @@ public class EstimateController {
      * @return 遷移先
      */
     @PostMapping(value = "order", params = "complete")
-    String complete(@Validated UserOrderForm userOrderForm, BindingResult result, Model model) {
+    String complete(@Validated UserOrderForm userOrderForm, BindingResult result, Model model, HttpServletRequest request) {
         if (result.hasErrors()) {
 
             model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
@@ -164,6 +185,16 @@ public class EstimateController {
         BeanUtils.copyProperties(userOrderForm, dto);
         estimateService.registerOrder(dto);
 
+        ServletServerHttpRequest req = new ServletServerHttpRequest(request);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpRequest(req);
+
+        URI location = builder.path("/complete").build().toUri();
+
+        return "redirect:" + location.toString();
+    }
+
+    @RequestMapping(value = "order/complete", method = RequestMethod.GET)
+    String redirect(){
         return "complete";
     }
 
