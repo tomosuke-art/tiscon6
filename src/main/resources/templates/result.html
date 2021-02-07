@@ -8,16 +8,18 @@
   <link rel="stylesheet" th:href="@{http://fonts.googleapis.com/css?family=Exo:900}"
         href="http://fonts.googleapis.com/css?family=Exo:900"/>
   <link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
 </head>
 
 <body>
 <nav th:insert="header.html :: header"></nav>
 <div class="container">
   <form th:action="@{/order}" th:object="${userOrderForm}" class="form-horizontal" method="post">
-    <h1>概算お見積り結果</h1>
+    <h1 style="text-align:center;"><i class="fas fa-yen-sign"></i> 概算お見積り結果 <i class="fas fa-yen-sign"></i></h1>
     <div class="col-sm-12">
-      <h2>概算お見積り結果は<span th:text="${price}"></span>円です。</h2>
-      <h4>個人情報</h4>
+      <h2 style="text-align:center;">概算お見積り結果は<span th:text="${price}" style="color:red;"></span>円です。</h2>
+      <h4 style="color: rgb(58, 100, 100);font-weight: bold;">個人情報 <i class="fas fa-user" style="color: rgb(128, 173, 173)"></i></h4>
       <table class="table table-bordered">
         <col span="1" style="background-color: #A9B7C7;">
         <col span="2" style="background-color: #FFFFFF;">
@@ -39,7 +41,7 @@
         </tr>
         </tbody>
       </table>
-      <h4>荷物情報</h4>
+      <h4 style="color: rgb(58, 100, 100);font-weight: bold;">引っ越し内容 <i class="fas fa-truck-moving"></i></h4>
       <table class="table table-bordered">
         <col span="1" style="background-color: #A9B7C7;">
         <col span="2" style="background-color: #FFFFFF;">
@@ -75,7 +77,7 @@
         </tr>
         </tbody>
       </table>
-      <h4>荷物情報</h4>
+      <h4 style="color: rgb(58, 100, 100);font-weight: bold;">荷物情報 <i class="fas fa-box"></i></h4>
       <table class="table table-bordered">
         <col span="1" style="background-color: #A9B7C7;">
         <col span="2" style="background-color: #FFFFFF;">
