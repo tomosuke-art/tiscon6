@@ -38,7 +38,7 @@ public class UserOrderForm {
 
     @NotBlank(message = "段ボールの個数を半角入力してください")
     @NotBlank(message = "段ボールの個数を入力してください")
-    private String box;
+    private String box="0";
 
     @Numeric
     @NotBlank
