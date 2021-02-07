@@ -95,6 +95,7 @@ public class EstimateController {
         Integer price = estimateService.getPrice(dto);
         // 段ボールの数が200を超えるとエラーメッセージを返しconfirmに表示（トモスケ）
         if(price == -10){
+            model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
             model.addAttribute("message",price);
             return "input";
         }
