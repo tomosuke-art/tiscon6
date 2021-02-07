@@ -28,6 +28,9 @@ public class UserOrderDto {
 
     private String month;   // Y.Kawabata
 
+    private String oldAddressNum;
+    private String newAddressNum;
+
     public String getCustomerName() {
         return customerName;
     }
@@ -126,4 +129,18 @@ public class UserOrderDto {
     // Y.Kawabata
     public int getMonth(){return Integer.parseInt(month);}
     public void setMonth(String month){this.month=month;}
+
+    public String getOldAddressNum(){
+        return oldAddressNum;
+    }
+    public void setOldAddressNum(String oldAddressNum){
+        this.oldAddressNum=oldAddressNum;
+    }
+
+    public String getNewAddressNum(){
+        return newAddressNum;
+    }
+    public void setNewAddressNum(String newAddressNum){
+        this.newAddressNum=newAddressNum;
+    }
 }

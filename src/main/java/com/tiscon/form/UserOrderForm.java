@@ -56,6 +56,13 @@ public class UserOrderForm {
     @NotBlank
     private  String month;      // Y.Kawabata
 
+    @Numeric(message = "転居元郵便番号を半角入力してください")
+    @NotBlank(message = "転居元郵便番号を入力してください")
+    private String oldAddressNum="";
+    @Numeric(message = "転居元郵便番号を半角入力してください")
+    @NotBlank(message = "転居先郵便番号を入力してください")
+    private String newAddressNum="";
+
     @NotNull
     private boolean washingMachineInstallation;
 
@@ -159,5 +166,19 @@ public class UserOrderForm {
     }
     public void setMonth(String month){
         this.month=month;
+    }
+
+    public String getOldAddressNum(){
+        return oldAddressNum;
+    }
+    public void setOldAddressNum(String oldAddressNum){
+        this.oldAddressNum=oldAddressNum;
+    }
+
+    public String getNewAddressNum(){
+        return newAddressNum;
+    }
+    public void setNewAddressNum(String newAddressNum){
+        this.newAddressNum=newAddressNum;
     }
 }
