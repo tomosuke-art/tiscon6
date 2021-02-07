@@ -56,11 +56,11 @@ public class UserOrderForm {
     @NotBlank
     private  String month;      // Y.Kawabata
 
-    @Numeric
-    @NotBlank
+    @Numeric(message = "転居元郵便番号を半角入力してください")
+    @NotBlank(message = "転居元郵便番号を入力してください")
     private String oldAddressNum="";
-    @Numeric
-    @NotBlank
+    @Numeric(message = "転居元郵便番号を半角入力してください")
+    @NotBlank(message = "転居先郵便番号を入力してください")
     private String newAddressNum="";
 
     @NotNull
